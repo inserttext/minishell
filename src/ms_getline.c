@@ -6,64 +6,99 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 06:58:41 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/20 00:01:20 by tingo            ###   ########.fr       */
+/*   Updated: 2019/01/20 00:59:47 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
 
-#define RSIZE 128
+#define RSIZE 2048
 
-static void		extend(char **line, size_t *n, size_t need)
+static char	*g_storep = 0;
+static char	*g_store = 0;
+
+static void	extend(char **m, size_t *size, size_t need, size_t filled)
 {
-	char *tmp;
+	char	*new;
 
-	if (need < 2 * *n)
-		need = 2 * *n;
-	if (!(tmp = (char *)malloc(sizeof(char) * need)))
-		exit(1);
-	ft_memcpy(tmp, *line, *n);
-	free(*line);
-	*line = tmp;
-	*n = need;
+	if (need < *size * 2)
+		need = *size * 2;
+	new = (char *)malloc(need * sizeof(char));
+	ft_memcpy(new, *m, filled);
+	*size = need;
+	free(*m);
+	*m = new;
 }
 
-static void		prep(char **line, size_t *n)
+static void	storefn(char *buf)
 {
-	if (*line == 0 && *n == 0)
+	size_t len;
+
+	len = ft_strlen(buf);
+	g_storep = (char *)malloc(sizeof(char) * (len + 1));
+	ft_memcpy(g_storep, buf, len);
+	g_storep[len] = '\0';
+	g_store = g_storep;
+}
+
+static int	recall(char **line, size_t *size, size_t *fill)
+{
+	char	*c;
+	size_t	need;
+
+	if ((c = ft_strchr(g_store, '\n')) != NULL)
+		need = c - g_store + 1;
+	else
+		need = ft_strlen(g_store);
+	if (need > *size)
+		extend(line, size, need, 0);
+	ft_memcpy(*line, g_store, need);
+	if (*(g_store += need) == '\0')
 	{
-		*n = RSIZE + 1;
-		if (!(*line = (char *)malloc(sizeof(char) * *n)))
-			exit(1);
+		free(g_storep);
+		g_store = 0;
+	}
+	*fill = need;
+	(*line)[need] = '\0';
+	return (!!c);
+}
+
+static void	aux(char **c, size_t *need, char *buf)
+{
+	if ((*c = ft_strchr(buf, '\n')) != NULL)
+	{
+		if (*need > (uintptr_t)*c - (uintptr_t)buf + 1U)
+			storefn(*c + 1);
+		*need = *c - buf + 2;
 	}
 }
 
-ssize_t			ms_getline(char **line, size_t *n)
+size_t		ms_getline(char **line)
 {
-	ssize_t		curr;
-	ssize_t		len;
-	size_t		need;
-	char		*c;
-	char		buf[RSIZE + 1];
+	char	*c;
+	char	buf[RSIZE + 1];
+	size_t	size;
+	size_t	fill;
+	size_t	need;
 
-	prep(line, n);
-	curr = 0;
-	while ((len = read(STDIN_FILENO, buf, RSIZE)) > 0)
+	fill = 0;
+	size = RSIZE + 1;
+	*line = (char *)malloc(size * sizeof(char));
+	if (g_store != NULL)
+		if (recall(line, &size, &fill) != 0)
+			return (fill);
+	while ((need = read(STDIN_FILENO, buf, RSIZE)) > 0)
 	{
-		c = ft_memchr(buf, '\n', len);
-		if (c)
-			len = c - buf + 1;
-		need = curr + len + 1;
-		if (need > *n)
-			extend(line, n, need);
-		ft_memcpy(*line + curr, buf, len);
-		curr += len;
+		buf[need] = '\0';
+		aux(&c, &need, buf);
+		if (need >= size)
+			extend(line, &size, need, fill);
+		ft_memcpy(*line, buf, need);
+		fill += need - 1;
 		if (c)
 			break;
 	}
-	if (len == 0)
-		ms_exit(0);
-	(*line)[curr] = '\0';
-	return (curr);
+	(*line)[fill] = '\0';
+	return (fill);
 }
