@@ -6,14 +6,14 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 06:58:41 by tingo             #+#    #+#             */
-/*   Updated: 2019/01/20 00:59:47 by tingo            ###   ########.fr       */
+/*   Updated: 2019/01/21 19:37:25 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
 
-#define RSIZE 2048
+#define RSIZE 2048U
 
 static char	*g_storep = 0;
 static char	*g_store = 0;
@@ -57,7 +57,7 @@ static int	recall(char **line, size_t *size, size_t *fill)
 	if (*(g_store += need) == '\0')
 	{
 		free(g_storep);
-		g_store = 0;
+		g_store = NULL;
 	}
 	*fill = need;
 	(*line)[need] = '\0';
@@ -72,6 +72,8 @@ static void	aux(char **c, size_t *need, char *buf)
 			storefn(*c + 1);
 		*need = *c - buf + 2;
 	}
+	else if (*need < RSIZE)
+		exit (0);
 }
 
 size_t		ms_getline(char **line)
@@ -96,7 +98,7 @@ size_t		ms_getline(char **line)
 			extend(line, &size, need, fill);
 		ft_memcpy(*line, buf, need);
 		fill += need - 1;
-		if (c)
+		if (c != NULL)
 			break;
 	}
 	(*line)[fill] = '\0';
