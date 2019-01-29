@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 06:59:45 by tingo             #+#    #+#             */
-/*   Updated: 2019/01/21 19:36:09 by tingo            ###   ########.fr       */
+/*   Updated: 2019/01/27 17:12:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include <sys/types.h>
 
-extern char		**environ;
-extern size_t	env_size;
-extern size_t	env_fill;
+extern char		**g_environ;
+extern size_t	g_env_size;
+extern size_t	g_env_fill;
 
 size_t	ms_getline(char **line);
 
