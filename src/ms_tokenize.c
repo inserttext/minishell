@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:07:52 by tingo             #+#    #+#             */
-/*   Updated: 2019/01/21 19:35:13 by tingo            ###   ########.fr       */
+/*   Updated: 2019/01/22 11:52:03 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ size_t	__ms_brackets(char **s, size_t *len)
 		ft_memcpy(tmp, g_p, *len);
 		ft_memcpy(tmp + *len, line, llen);
 		*s = tmp + (*s - g_p);
-		ft_printf("%p\n", *s);
 		free(g_p);
+		free(line);
 		*len += llen;
 		g_p = tmp;
 		g_p[*len] = '\0';
@@ -114,8 +114,7 @@ char	**ms_tokenize(char **line, size_t len)
 	offset[0] = token - *line;
 	while ((token = ms_tok(NULL, &len)) != NULL)
 	{
-		offset[i] = token - *line;
-		i++;
+		offset[i++] = token - g_p;
 		if (i == size)
 		{
 			size += TOK_SIZE;
