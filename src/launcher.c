@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:47:39 by marvin            #+#    #+#             */
-/*   Updated: 2019/01/28 20:56:07 by marvin           ###   ########.fr       */
+/*   Updated: 2019/01/30 23:21:09 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int 			ms_launcher(char **args)
 		exit(0);
 	}
 	else if (pid < 0)
-		ft_fprintf(2, "tingo sucks\n");
+		ft_fprintf(2, "yah dun goofed\n");
 	else
 	{
 		waitpid(pid, &status, WUNTRACED);
