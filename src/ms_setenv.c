@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 21:59:48 by tingo             #+#    #+#             */
-/*   Updated: 2019/01/27 17:12:30 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/03 02:06:48 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		__ms_setenv_extend()
 	g_environ = new;
 }
 
-inline void	set(const char *name, const char *value, const size_t i)
+void	set(const char *name, const char *value, const size_t i)
 {
 	char	*t;
 
