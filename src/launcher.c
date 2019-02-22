@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:47:39 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/05 18:27:40 by marvin           ###   ########.fr       */
+/*   Updated: 2019/02/08 01:08:31 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 int				ft_execvp(const char *filename, char *const argv[])
 {
+	char *tmpfile;
+
 	if (ft_strchr(filename, '/') != NULL)
 	{
 		execve(filename, argv, __environ);
@@ -54,7 +56,7 @@ int 			ms_exec(char **args)
 	hash = sbdm((unsigned char *)args[0]) / MAP_SIZE;
 	while (hash < MAP_SIZE && g_map[hash].name != NULL)
 	{
-		if (ft_strcmmp(g_map[hash].name, args[0]) == 0)
+		if (ft_strcmp(g_map[hash].name, args[0]) == 0)
 			return(g_map[hash].f(args));
 		hash++;
 	}
