@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_setenv.c                                        :+:      :+:    :+:   */
+/*   ms_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 21:59:48 by tingo             #+#    #+#             */
-/*   Updated: 2019/02/15 01:28:37 by tingo            ###   ########.fr       */
+/*   Updated: 2019/02/22 02:48:49 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ int			__ms_builtin_setenv(const char *name, const char *value,
 char		*__ms_builtin_getenv(const char *name)
 {
 	size_t i;
+	size_t len;
 
 	i = 0;
 	if (name == NULL || *name == '\0' || ft_strchr(name, '=') != NULL)
 		return (NULL);
+	len = ft_strlen(name);
 	while(i < g_env_fill)
 	{
-		if (ft_strncmp(name, g_environ[i], ft_strlen(name)) == 0)
-			return(g_environ[i] + ft_strlen(name) + 1);
+		if (ft_strncmp(name, g_environ[i], len) == 0)
+			return(g_environ[i] + len + 1);
 		++i;
 	}
 	return (NULL);

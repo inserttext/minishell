@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 02:38:10 by tingo             #+#    #+#             */
-/*   Updated: 2019/02/15 01:35:53 by tingo            ###   ########.fr       */
+/*   Updated: 2019/02/22 04:38:51 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*__ms_tok_sub(char *tok)
 {
 	char	*sym;
 	char	*new;
+	char	*c;
 
 	if (tok[0] == '~' && (tok[1] == '\0' || tok[1] == '/'))
 	{
@@ -26,6 +27,8 @@ char	*__ms_tok_sub(char *tok)
 		else
 			new = ft_strjoin(2, sym, tok + 1);
 	}
-	while (
+	while ((c = ft_strchr(tok, '$')))
+	{
+	}
 	return (NULL);
 }
