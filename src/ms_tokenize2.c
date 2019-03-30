@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 02:38:10 by tingo             #+#    #+#             */
-/*   Updated: 2019/03/30 09:27:15 by tingo            ###   ########.fr       */
+/*   Updated: 2019/03/30 09:30:53 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char *aux(char *new, char *a)
 	while (a != NULL)
 	{
 		z = a + ft_strspn(a, ACCEPT);
-		if ((z = ft_strchr(z, '$')) != '\0')
+		if ((z = ft_strchr(z, '$')) != NULL)
 			*z++ = '\0';
 		sym = __ms_builtin_getenv(a);
 		new = __strjoin_free(sym, a + ft_strspn(a, ACCEPT));
@@ -48,7 +48,7 @@ char		*__ms_tok_sub(char *tok)
 	char	*a;
 
 	new = NULL;
-	if ((a = ft_strchr(tok, '$')) != '\0')
+	if ((a = ft_strchr(tok, '$')) != NULL)
 		*a++ = '\0';
 	if (tok[0] == '~' && (tok[1] == '\0' || tok[1] == '/'))
 	{

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 20:47:39 by marvin            #+#    #+#             */
-/*   Updated: 2019/02/26 15:31:43 by marvin           ###   ########.fr       */
+/*   Updated: 2019/03/30 09:32:12 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char *test(const char *filename, const char *path)
 	size_t	plen;
 	size_t	flen;
 
-	plen = ft_strchr(path, ':') ? ft_strchr(path, ':') - path : ft_strlen(path);
+	plen = ft_strchr(path, ':') ? (size_t)(ft_strchr(path, ':') - path)
+								: ft_strlen(path);
 	flen = ft_strlen(filename);
 	file = (char *)malloc(sizeof(char) * (plen + flen) + 1);
 	ft_memcpy(file, path, plen);

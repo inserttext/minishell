@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/12/19 07:01:45 by tingo            ###   ########.fr        #
+#    Updated: 2019/03/30 09:33:09 by tingo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,13 @@ ODIR   = obj
 LDIR   = libft
 IDIR   = includes
 
-_SRC   = *.c
+_SRC   = builtin_map.c \
+				 launcher.c \
+				 main.c \
+				 minishell.c \
+				 ms_env.c \
+				 ms_getline.c \
+				 ms_tokenize.c
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
 
 _OBJ   = $(_SRC:.c=.o)
