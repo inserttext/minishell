@@ -6,12 +6,13 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 19:07:52 by tingo             #+#    #+#             */
-/*   Updated: 2019/02/15 00:35:18 by tingo            ###   ########.fr       */
+/*   Updated: 2019/03/30 09:26:11 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
+#include "ms_tokenize2.c"
 
 #define TOK_DELIM " \t\r\n\a"
 #define TOK_SIZE 64
@@ -89,7 +90,7 @@ char	**finalize(char **line, size_t *offsets, size_t len)
 	ret = (char **)malloc(sizeof(char *) * (len + 1));
 	while (i < len)
 	{
-		ret[i] = offsets[i] + g_p;
+		ret[i] = __ms_tok_sub(offsets[i] + g_p);
 		i++;
 	}
 	*line = g_p;

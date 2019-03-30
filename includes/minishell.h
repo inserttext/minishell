@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 06:59:45 by tingo             #+#    #+#             */
-/*   Updated: 2019/02/22 02:50:58 by tingo            ###   ########.fr       */
+/*   Updated: 2019/03/30 09:18:18 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	gen_map();
 unsigned long	sbdm(unsigned char *str);
 
 char	*__ms_builtin_getenv(const char *name);
+char	*__ms_builtin_getnenv(const char *name, size_t len);
 int		__ms_builtin_setenv(const char *name, const char *value, int overwrite);
 
 #endif
