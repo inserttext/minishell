@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 21:59:48 by tingo             #+#    #+#             */
-/*   Updated: 2019/02/22 02:48:49 by tingo            ###   ########.fr       */
+/*   Updated: 2019/05/21 12:37:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		__ms_setenv_initenv()
 		i++;
 	}
 	g_environ = new;
+	g_env_fill = i;
 }
 
 int			__ms_builtin_setenv(const char *name, const char *value,
