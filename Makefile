@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2019/03/30 09:39:07 by tingo            ###   ########.fr        #
+#    Updated: 2019/07/07 12:10:31 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ _SRC   = builtin_map.c \
 				 launcher.c \
 				 main.c \
 				 minishell.c \
-				 ms_env.c \
+				 env.c \
 				 ms_getline.c \
 				 ms_tokenize.c
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
