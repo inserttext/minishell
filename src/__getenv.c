@@ -10,7 +10,12 @@ char	*__getenv(char *name)
 		return (NULL);
 	if (name[len - 1] == '=')
 		len -= 1;
-	while (__environ[i][len] == '=' && ft_strncmp(__environ[i], name, len) != 0)
+	while (__environ[i] != NULL)
+	{
+		if (__environ[i][len] == '=' &&
+			ft_strncmp(__environ[i], name, len) == 0)
+			return (__environ[i] + len + 1);
 		i++;
-	return (__environ[i]);
+	}
+	return (NULL);
 }
