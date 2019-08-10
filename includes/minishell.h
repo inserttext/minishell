@@ -3,7 +3,8 @@
 
 #include "unistd.h"
 
-extern size_t	__env_size;
+extern size_t	g_env_size;
+extern char		**g_environ;
 
 char			*__getenv(char *name);
 void			__setenv(char *name, const char *value, int overwrite);
