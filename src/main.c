@@ -1,7 +1,10 @@
 #include "../includes/minishell.h"
-#include "unistd.h"
+#include "../libft/includes/libft.h"
+#include <unistd.h>
+#include <stdio.h>
 
-size_t __env_size;
+size_t	g_env_size;
+char	**g_environ;
 
 static size_t	__get_env_size()
 {
@@ -13,9 +16,23 @@ static size_t	__get_env_size()
 	return (len);
 }
 
+static void	env_cpy()
+{
+	size_t i;
+
+	i = 0;
+	g_environ = (char **)ft_calloc(g_env_size + 1, sizeof(char *));
+	while (__environ[i] != NULL)
+	{
+		g_environ[i] = ft_strdup(__environ[i]);
+		i++;
+	}
+}
+
 int				main(void)
 {
-	__env_size = __get_env_size();
+	g_env_size = __get_env_size();
+	env_cpy();
 	ms_loop();
 	return(0);
 }
