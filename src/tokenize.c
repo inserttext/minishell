@@ -28,13 +28,13 @@ static struct s_lst *mklst(const char *str)
 	char			*token;
 
 
-	token = ft_strtok((char *)str, " ");
+	token = ft_strtok((char *)str, " \n");
 	curr = new_node(token);
 	head = curr;
 	while (token != NULL)
 	{
 		head->size += 1;
-		token = ft_strtok(NULL, " ");
+		token = ft_strtok(NULL, " \n");
 		curr->next = new_node(token);
 		curr = curr->next;
 	}

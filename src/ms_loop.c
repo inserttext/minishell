@@ -21,7 +21,7 @@ void	ms_loop()
 			continue;
 		}
 		for (int i = 0; tok[i] != NULL; i++)
-			printf("%s\n", tok[i]);
+			printf("echo:%s\n", tok[i]);
 		free(line);
 		free(tok);
 	}
