@@ -2,19 +2,26 @@
 #include "../includes/minishell.h"
 #include <sys/types.h>
 #include <dirent.h>
+#include <unistd.h>
+
 static void	changedir(char *dir)
 {
 	chdir(dir);
 	__setenv("OLDPWD", __getenv("PWD"), 1);
-	__setenv("PWD", dir, 1);
+	__setenv("PWD", getcwd(NULL, 0) , 1);
 }
 
 int __cd(char **tok)
 {
 	DIR *dir;
 
-	if (tok[1] == NULL && __getenv("HOME") != NULL)
-		changedir(__getenv("HOME"));
+	if (tok[1] == NULL)
+	{
+		if (__getenv("HOME") != NULL)
+			changedir(__getenv("HOME"));
+		else
+			return (0);
+	}
 	else if (access(tok[1], R_OK) == 0)
 	{
 		if ((dir = opendir(tok[1])) != NULL)
