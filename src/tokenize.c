@@ -1,12 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/13 14:40:35 by marvin            #+#    #+#             */
+/*   Updated: 2019/08/13 14:55:26 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minishell.h"
 #include "../libft/includes/libft.h"
 #include <unistd.h>
-
-struct s_lst
-{
-	void			*data;
-	size_t			size;
-	struct s_lst	*next;
-};
 
 static struct s_lst	*new_node(void *data)
 {
@@ -21,12 +27,11 @@ static struct s_lst	*new_node(void *data)
 	return (new);
 }
 
-static struct s_lst *mklst(const char *str)
+static struct s_lst	*mklst(const char *str)
 {
 	struct s_lst	*head;
 	struct s_lst	*curr;
 	char			*token;
-
 
 	token = ft_strtok((char *)str, " \n");
 	curr = new_node(token);
@@ -53,7 +58,7 @@ static void			del(struct s_lst *head)
 	}
 }
 
-char				**tokenize(const char *str)
+char				**tokenize(char *str)
 {
 	struct s_lst	*lst;
 	struct s_lst	*curr;

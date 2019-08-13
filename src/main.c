@@ -1,36 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/13 14:40:30 by marvin            #+#    #+#             */
+/*   Updated: 2019/08/13 14:52:06 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 #include "../libft/includes/libft.h"
 #include <unistd.h>
-#include <stdio.h>
+#include <stdlib.h>
 
+#define ENVIRON extern char **environ
+
+ENVIRON;
 size_t	g_env_size;
 char	**g_environ;
 char	*g_pid;
 
-static size_t	__get_env_size()
+static size_t	get_env_size(void)
 {
 	size_t len;
 
 	len = 0;
-	while (__environ[len] != NULL)
+	while (environ[len] != NULL)
 		len++;
 	return (len);
 }
 
-static void		env_cpy()
+static void		env_cpy(void)
 {
 	size_t i;
 
 	i = 0;
 	g_environ = (char **)ft_calloc(g_env_size + 1, sizeof(char *));
-	while (__environ[i] != NULL)
+	while (environ[i] != NULL)
 	{
-		g_environ[i] = ft_strdup(__environ[i]);
+		g_environ[i] = ft_strdup(environ[i]);
 		i++;
 	}
 }
 
-static void		del_env()
+static void		del_env(void)
 {
 	size_t i;
 
@@ -45,10 +60,10 @@ static void		del_env()
 
 int				main(void)
 {
-	g_env_size = __get_env_size();
+	g_env_size = get_env_size();
 	g_pid = ft_itoa(getpid());
 	env_cpy();
 	ms_loop();
 	del_env();
-	return(0);
+	return (0);
 }

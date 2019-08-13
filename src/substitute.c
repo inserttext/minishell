@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   substitute.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/13 14:40:34 by marvin            #+#    #+#             */
+/*   Updated: 2019/08/13 14:56:11 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
 #include <unistd.h>
@@ -11,7 +23,7 @@ char	*getvalue(char **str, size_t len)
 
 	t = (*str)[len];
 	(*str)[len] = '\0';
-	value = __getenv(*str);
+	value = ms_getenv(*str);
 	(*str)[len] = t;
 	*str += len;
 	return (value);
@@ -19,7 +31,7 @@ char	*getvalue(char **str, size_t len)
 
 char	*cashmoney(char **str)
 {
-	size_t 		len;
+	size_t	len;
 
 	if ((*str)[1] == '$')
 	{
@@ -29,7 +41,7 @@ char	*cashmoney(char **str)
 	else if ((len = ft_strspn(++(*str), ENVC)) == 0)
 		return (ft_strdup("$"));
 	else
-		return(ft_strdup(getvalue(str, len)));
+		return (ft_strdup(getvalue(str, len)));
 }
 
 char	*next(char **str)
@@ -55,7 +67,7 @@ char	*generate(char *str)
 
 	if (str[0] == '~' && (str[1] == '/' || str[1] == '\0'))
 	{
-		new = ft_strdup(__getenv("HOME"));
+		new = ft_strdup(ms_getenv("HOME"));
 		str += str[1] == '\0' ? 1 : 2;
 	}
 	else

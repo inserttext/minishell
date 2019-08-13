@@ -1,8 +1,0 @@
-#include "../libft/includes/libft.h"
-#include <stdlib.h>
-
-int		__exit(char **tok)
-{
-	(void)tok;
-	return (-1);
-}

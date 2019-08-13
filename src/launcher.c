@@ -1,21 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   launcher.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/13 14:40:29 by marvin            #+#    #+#             */
+/*   Updated: 2019/08/13 14:42:43 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
-struct s_func
-{
-	char *name;
-	int (*f)(char**);
-};
-
-static struct s_func tbl[128] = {
-	[5] = {"exit", &__exit},
-	[24] = {"env", &__env},
-	[36] = {"echo", &__echo},
-	[60] = {"unset", &__unset},
-	[97] = {"export", &__export},
-	[98] = {"cd", &__cd},
+static struct s_func	tbl[128] = {
+	[5] = {"exit", &builtin_exit},
+	[24] = {"env", &builtin_env},
+	[36] = {"echo", &builtin_echo},
+	[60] = {"unset", &builtin_unset},
+	[97] = {"export", &builtin_export},
+	[98] = {"cd", &builtin_cd},
 };
 
 static unsigned long	hash(unsigned char *str)
@@ -33,8 +39,8 @@ static unsigned long	hash(unsigned char *str)
 
 static int				forkexec(char *run, char **tok)
 {
-	pid_t pid;
-	int status;
+	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == 0)
@@ -60,7 +66,7 @@ static int				searchpath(char **tok)
 	char *path;
 	char *run;
 
-	fullpath = ft_strdup(__getenv("PATH"));
+	fullpath = ft_strdup(ms_getenv("PATH"));
 	path = ft_strtok(fullpath, ":");
 	while (path != NULL)
 	{
@@ -69,7 +75,7 @@ static int				searchpath(char **tok)
 		{
 			forkexec(run, tok);
 			free(run);
-			break;
+			break ;
 		}
 		free(run);
 		path = ft_strtok(NULL, ":");

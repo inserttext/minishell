@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_getline.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/13 14:40:31 by marvin            #+#    #+#             */
+/*   Updated: 2019/08/13 14:54:54 by marvin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/includes/libft.h"
 #include <unistd.h>
 #include <stdio.h>
@@ -65,7 +77,7 @@ static void	aux(char **c, size_t *need, char *buf)
 		exit(0);
 }
 
-size_t		__getline(char **line)
+size_t		ms_getline(char **line)
 {
 	char	*c;
 	char	buf[RSIZE + 1];
@@ -88,7 +100,7 @@ size_t		__getline(char **line)
 		ft_memcpy(*line, buf, need);
 		fill += need - 1;
 		if (c != NULL)
-			break;
+			break ;
 	}
 	(*line)[fill] = '\0';
 	return (fill);
