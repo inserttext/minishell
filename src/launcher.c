@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:29 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:42:43 by marvin           ###   ########.fr       */
+/*   Updated: 2019/08/13 16:22:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,11 @@ static int				forkexec(char *run, char **tok)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(run, tok, g_environ) == -1)
-			perror("msh");
+		execve(run, tok, g_environ);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
-		perror("msh");
+		printf("msh: unable to fork process\n");
 	else
 	{
 		waitpid(pid, &status, WUNTRACED);
