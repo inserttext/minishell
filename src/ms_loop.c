@@ -18,11 +18,14 @@ void	ms_loop()
 {
 	char	*line;
 	char	**tok;
+	int		loop;
 
-	while(1)
+	loop = 1;
+	while(loop >= 0)
 	{
 		write(STDOUT_FILENO, "$>", 2);
-		__getline(&line);
+		if (__getline(&line) == 0)
+			return;
 		if (line[0] == '\0')
 		{
 			free(line);
@@ -35,7 +38,7 @@ void	ms_loop()
 			continue;
 		}
 		tok = substitute(tok);
-		launcher(tok);
+		loop = launcher(tok);
 		delete(tok);
 		free(line);
 	}

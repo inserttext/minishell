@@ -16,7 +16,7 @@ static size_t	__get_env_size()
 	return (len);
 }
 
-static void	env_cpy()
+static void		env_cpy()
 {
 	size_t i;
 
@@ -29,10 +29,24 @@ static void	env_cpy()
 	}
 }
 
+static void		del_env()
+{
+	size_t i;
+
+	i = 0;
+	while (g_environ[i] != NULL)
+	{
+		free(g_environ[i]);
+		i++;
+	}
+	free(g_environ);
+}
+
 int				main(void)
 {
 	g_env_size = __get_env_size();
 	env_cpy();
 	ms_loop();
+	del_env();
 	return(0);
 }

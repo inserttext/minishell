@@ -13,7 +13,7 @@ static struct s_func tbl[128] = {
 	[5] = {"exit", &__exit},
 	[24] = {"env", &__env},
 	[36] = {"echo", &__echo},
-	[60] = {"unset", NULL},
+	[60] = {"unset", &__unset},
 	[97] = {"export", &__export},
 	[98] = {"cd", &__cd},
 };
@@ -87,7 +87,8 @@ int						launcher(char **tok)
 
 	hashed = hash((unsigned char *)tok[0]) % 128;
 	if (tbl[hashed].name != NULL && ft_strcmp(tok[0], tbl[hashed].name) == 0)
-		return (tbl[hashed].f(tok));
-	ret = searchpath(tok);
+		ret = tbl[hashed].f(tok);
+	else
+		ret = searchpath(tok);
 	return (ret);
 }

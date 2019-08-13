@@ -1,5 +1,5 @@
-#include "../includes/minishell.h"
 #include "../libft/includes/libft.h"
+#include "../includes/minishell.h"
 
 static void	new_entry(char *name, const char *value)
 {
@@ -22,8 +22,7 @@ static void	replace(char **loc, char *name, const char *value)
 	free(tmp);
 }
 
-
-void	__setenv(char *name, const char *value, int overwrite)
+void		__setenv(char *name, const char *value, int overwrite)
 {
 	size_t	i;
 	size_t	len;
