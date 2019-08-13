@@ -12,5 +12,6 @@ void			__setenv(char *name, const char *value, int overwrite);
 void			ms_loop();
 void			__getline(char **line);
 char			**tokenize(char *str);
+char			**substitute(char **tok);
 
 #endif

@@ -1,6 +1,19 @@
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
 
+void	delete(char **mem)
+{
+	size_t i;
+
+	i = 0;
+	while (mem[i] != NULL)
+	{
+		free(mem[i]);
+		i++;
+	}
+	free(mem);
+}
+
 void	ms_loop()
 {
 	char	*line;
@@ -8,6 +21,7 @@ void	ms_loop()
 
 	while(1)
 	{
+		write(STDOUT_FILENO, "$>", 2);
 		__getline(&line);
 		if (line[0] == '\0')
 		{
@@ -20,9 +34,10 @@ void	ms_loop()
 			free(line);
 			continue;
 		}
-		for (int i = 0; tok[i] != NULL; i++)
-			printf("echo:%s\n", tok[i]);
+		tok = substitute(tok);
+		for (int i = 0; tok[i]; i++)
+			printf("%s\n", tok[i]);
+		delete(tok);
 		free(line);
-		free(tok);
 	}
 }
