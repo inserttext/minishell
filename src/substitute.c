@@ -4,7 +4,7 @@
 
 #define ENVC "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
 
-static char		*search(char *tok, char *str)
+static char		*search(char *str, char *tok)
 {
 	char	*name;
 	char	*new;
@@ -23,6 +23,7 @@ static char		*parsenv(char *str)
 {
 	char	*new;
 	char	*tok;
+	char	*tmp;
 	int		fl;
 
 	fl = 0;
@@ -30,14 +31,16 @@ static char		*parsenv(char *str)
 	tok = ft_strtok(str, "$");
 	while (tok != NULL)
 	{
-		str = new;
-		if (fl == 0 && tok[0] == '~' && (tok[1] == '/' || tok[1] == '\0'))
+		tmp = new;
+		if (fl == 0 && tok == str)
+			new = ft_strdup(tok);
+		else if (fl == 0 && tok[0] == '~' && (tok[1] == '/' || tok[1] == '\0'))
 			new = ft_strjoin(2, __getenv("HOME"), tok + 1);
 		else if (ft_strspn(tok, ENVC) == 0)
 			new = ft_strjoin(3, new, "$", tok);
 		else
-			new = search(tok, new);
-		free(str);
+			new = search(new, tok);
+		free(tmp);
 		tok = ft_strtok(NULL, "$");
 		fl = 1;
 	}
