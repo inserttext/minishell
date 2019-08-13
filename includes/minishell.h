@@ -17,5 +17,6 @@ int				launcher(char **tok);
 
 int				__cd(char **tok);
 int				__exit(char **tok);
+int				__echo(char **tok);
 
 #endif
