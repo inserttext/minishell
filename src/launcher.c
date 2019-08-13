@@ -14,7 +14,7 @@ static struct s_func tbl[128] = {
 	[36] = {"echo", NULL},
 	[60] = {"unset", NULL},
 	[97] = {"export", NULL},
-	[98] = {"cd", NULL},
+	[98] = {"cd", &__cd},
 };
 
 static unsigned long	hash(unsigned char *str)

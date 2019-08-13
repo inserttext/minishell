@@ -15,4 +15,6 @@ char			**tokenize(char *str);
 char			**substitute(char **tok);
 int				launcher(char **tok);
 
+int				__cd(char **tok);
+
 #endif
