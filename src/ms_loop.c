@@ -37,7 +37,7 @@ void	ms_loop()
 			free(line);
 			continue;
 		}
-		tok = substitute(tok);
+		substitute(tok);
 		loop = launcher(tok);
 		delete(tok);
 		free(line);

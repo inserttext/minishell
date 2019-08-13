@@ -5,6 +5,7 @@
 
 size_t	g_env_size;
 char	**g_environ;
+char	*g_pid;
 
 static size_t	__get_env_size()
 {
@@ -45,6 +46,7 @@ static void		del_env()
 int				main(void)
 {
 	g_env_size = __get_env_size();
+	g_pid = ft_itoa(getpid());
 	env_cpy();
 	ms_loop();
 	del_env();

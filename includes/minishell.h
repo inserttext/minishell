@@ -5,6 +5,7 @@
 
 extern size_t	g_env_size;
 extern char		**g_environ;
+extern char		*g_pid;
 
 char			*__getenv(char *name);
 void			__setenv(char *name, const char *value, int overwrite);
@@ -13,7 +14,7 @@ void			__unsetenv(char *name);
 void			ms_loop();
 size_t			__getline(char **line);
 char			**tokenize(char *str);
-char			**substitute(char **tok);
+void			substitute(char **tok);
 int				launcher(char **tok);
 
 int				__cd(char **tok);
