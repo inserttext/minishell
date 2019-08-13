@@ -62,7 +62,7 @@ static void	aux(char **c, size_t *need, char *buf)
 		*need = *c - buf + 2;
 	}
 	else if (*need < RSIZE)
-		exit (0);
+		exit(0);
 }
 
 size_t		__getline(char **line)

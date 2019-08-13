@@ -13,5 +13,6 @@ void			ms_loop();
 void			__getline(char **line);
 char			**tokenize(char *str);
 char			**substitute(char **tok);
+int				launcher(char **tok);
 
 #endif

@@ -35,8 +35,7 @@ void	ms_loop()
 			continue;
 		}
 		tok = substitute(tok);
-		for (int i = 0; tok[i]; i++)
-			printf("%s\n", tok[i]);
+		launcher(tok);
 		delete(tok);
 		free(line);
 	}
