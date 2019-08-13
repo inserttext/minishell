@@ -2,7 +2,7 @@
 #include "../includes/minishell.h"
 #include <unistd.h>
 
-#define ENVCHAR "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+#define ENVC "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
 
 static char		*search(char *tok, char *str)
 {
@@ -10,7 +10,7 @@ static char		*search(char *tok, char *str)
 	char	*new;
 	size_t	len;
 
-	len = ft_strspn(tok, ENVCHAR);
+	len = ft_strspn(tok, ENVC);
 	name = (char *)malloc(len * sizeof(char));
 	ft_memcpy(name, tok, len);
 	name[len] = '\0';
@@ -33,7 +33,7 @@ static char		*parsenv(char *str)
 		str = new;
 		if (fl == 0 && tok[0] == '~' && (tok[1] == '/' || tok[1] == '\0'))
 			new = ft_strjoin(2, __getenv("HOME"), tok + 1);
-		else if (ft_strspn(tok, ENVCHAR) == 0)
+		else if (ft_strspn(tok, ENVC) == 0)
 			new = ft_strjoin(3, new, "$", tok);
 		else
 			new = search(tok, new);

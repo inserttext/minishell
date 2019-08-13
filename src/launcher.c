@@ -14,7 +14,7 @@ static struct s_func tbl[128] = {
 	[24] = {"env", &__env},
 	[36] = {"echo", &__echo},
 	[60] = {"unset", NULL},
-	[97] = {"export", NULL},
+	[97] = {"export", &__export},
 	[98] = {"cd", &__cd},
 };
 

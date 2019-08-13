@@ -19,5 +19,6 @@ int				__cd(char **tok);
 int				__exit(char **tok);
 int				__echo(char **tok);
 int				__env(char **tok);
+int				__export(char **tok);
 
 #endif
