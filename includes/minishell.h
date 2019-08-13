@@ -16,5 +16,6 @@ char			**substitute(char **tok);
 int				launcher(char **tok);
 
 int				__cd(char **tok);
+int				__exit(char **tok);
 
 #endif
