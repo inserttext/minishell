@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:29 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 16:22:24 by marvin           ###   ########.fr       */
+/*   Updated: 2019/08/15 17:02:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ int						launcher(char **tok)
 	hashed = hash((unsigned char *)tok[0]) % 128;
 	if (tbl[hashed].name != NULL && ft_strcmp(tok[0], tbl[hashed].name) == 0)
 		ret = tbl[hashed].f(tok);
+	else if (ft_strchr(tok[0], '/') != NULL)
+	{
+		if (access(tok[0], X_OK) == 0)
+			ret = forkexec(tok[0], tok);
+		else
+			ft_printf("msh: command not found: %s\n", tok[0]);
+	}
 	else
 		ret = searchpath(tok);
 	return (ret);
