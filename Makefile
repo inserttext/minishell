@@ -1,50 +1,39 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2019/08/08 10:20:57 by marvin           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC        = gcc
+CFLAGS    = -MMD
+CERR      = -Wall -Wextra -Werror
+NAME      = minishell
+BIN_DIR   = bin
+BUILD_DIR = build
 
-CC     = gcc
-CFLAGS = -std=gnu11 -g
-CERROR = -Wall -Werror -Wextra
-NAME   = bin/minishell
+LIBS    = -Llibft -lft
 
-SDIR   = src
-ODIR   = obj
-LDIR   = libft
-IDIR   = includes
-
-_SRC   = *.c
-SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
-
-_OBJ   = $(_SRC:.c=.o)
-OBJ    = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-.PHONY: $(NAME)
+SRC		= $(wildcard src/*.c)
+OBJ		= $(SRC:%.c=$(BUILD_DIR)/%.o)
+DEP		= $(OBJ:%.o=%.d)
 
 all: $(NAME)
 
-$(NAME):
-	@make -C libft
-	@$(CC) $(CERROR) $(CFLAGS) -c $(SRC) -I $(IDIR)
-	@mkdir -p $(ODIR) bin
-	@mv $(_OBJ) $(ODIR)
-	@$(CC) $(CERROR) $(CFLAGS) -o $(NAME) $(OBJ) -I $(IDIR) -L $(LDIR) -lft
+$(NAME): $(BIN_DIR)/$(NAME)
+
+%/:
+	mkdir -p $@
+
+$(BIN_DIR)/$(NAME): $(OBJ) | $(BIN_DIR)/
+	$(CC) -o $@ $^ $(LIBS)
+
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
+	$(CC) $(CERR) $(CFLAGS) -c -o $@ $< -I./includes -I./libft/includes
+
+-include $(DEP)
+
+.PHONY: clean fclean re
 
 clean:
-	@make clean -C libft
-	@/bin/rm -rf $(ODIR)
-	@echo remove $(ODIR)
+	rm -f $(OBJ)
+	rm -f $(DEP)
 
-fclean: clean
-	@make fclean -C libft
-	@/bin/rm -rf bin
-	@echo remove bin
+fclean:
+	rm -rf $(BUILD_DIR)
+	rm -rf $(BIN_DIR)
 
-re:	fclean all
+re: fclean all
