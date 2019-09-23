@@ -5,6 +5,7 @@ NAME      = minishell
 BIN_DIR   = bin
 BUILD_DIR = build
 
+INC     = -Iincludes -Ilibft/includes
 LIBS    = -Llibft -lft
 
 SRC		= $(wildcard src/*.c)
@@ -22,7 +23,7 @@ $(BIN_DIR)/$(NAME): $(OBJ) | $(BIN_DIR)/
 	$(CC) -o $@ $^ $(LIBS)
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
-	$(CC) $(CERR) $(CFLAGS) -c -o $@ $< -I./includes -I./libft/includes
+	$(CC) $(CERR) $(CFLAGS) -c -o $@ $< $(INC)
 
 -include $(DEP)
 
