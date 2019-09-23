@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:32 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:44:14 by marvin           ###   ########.fr       */
+/*   Updated: 2019/08/28 09:50:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ms_loop(void)
 	loop = 1;
 	while (loop >= 0)
 	{
-		write(STDOUT_FILENO, "$>", 2);
+		write(STDOUT_FILENO, "$> ", 3);
 		if (ms_getline(&line) == 0)
 			return ;
 		if (line[0] == '\0')
