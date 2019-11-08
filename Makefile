@@ -1,5 +1,5 @@
 CC        = gcc
-CFLAGS    = -MMD
+CFLAGS    = -MMD -g3
 CERR      = -Wall -Wextra -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion
 # CERR     += -Werror
 NAME      = minishell
@@ -20,7 +20,10 @@ $(NAME): $(BIN_DIR)/$(NAME)
 %/:
 	mkdir -p $@
 
-$(BIN_DIR)/$(NAME): $(OBJ) | $(BIN_DIR)/
+libft/libft.a:
+	make -C libft
+
+$(BIN_DIR)/$(NAME): $(OBJ) libft/libft.a | $(BIN_DIR)/
 	$(CC) -o $@ $^ $(LIBS)
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
