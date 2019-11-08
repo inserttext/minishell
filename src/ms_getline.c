@@ -19,14 +19,14 @@
 static char	*g_storep = 0;
 static char	*g_store = 0;
 
-static void	extend(char **m, size_t *size, size_t need, size_t filled)
+static void	extend(char **m, ssize_t *size, ssize_t need, ssize_t filled)
 {
 	char	*new;
 
 	if (need < *size * 2)
 		need = *size * 2;
-	new = (char *)malloc(need * sizeof(char));
-	ft_memcpy(new, *m, filled);
+	new = (char *)malloc((size_t)need * sizeof(char));
+	ft_memcpy(new, *m, (size_t)filled);
 	*size = need;
 	free(*m);
 	*m = new;
@@ -43,18 +43,18 @@ static void	storefn(char *buf)
 	g_store = g_storep;
 }
 
-static int	recall(char **line, size_t *size, size_t *fill)
+static int	recall(char **line, ssize_t *size, ssize_t *fill)
 {
 	char	*c;
-	size_t	need;
+	ssize_t	need;
 
 	if ((c = ft_strchr(g_store, '\n')) != NULL)
-		need = c - g_store + 1;
+		need = (ssize_t)((uintptr_t)c - (uintptr_t)g_store) + 1;
 	else
-		need = ft_strlen(g_store);
+		need = (ssize_t)ft_strlen(g_store);
 	if (need > *size)
 		extend(line, size, need, 0);
-	ft_memcpy(*line, g_store, need);
+	ft_memcpy(*line, g_store, (size_t)need);
 	if (*(g_store += need) == '\0')
 	{
 		free(g_storep);
@@ -65,29 +65,29 @@ static int	recall(char **line, size_t *size, size_t *fill)
 	return (!!c);
 }
 
-static void	aux(char **c, size_t *need, char *buf)
+static void	aux(char **c, ssize_t *need, char *buf)
 {
 	if ((*c = ft_strchr(buf, '\n')) != NULL)
 	{
-		if (*need > (uintptr_t)*c - (uintptr_t)buf + 1U)
+		if (*need > (ssize_t)((uintptr_t)*c - (uintptr_t)buf) + 1)
 			storefn(*c + 1);
-		*need = *c - buf + 2;
+		*need = (ssize_t)((uintptr_t)*c - (uintptr_t)buf) + 2;
 	}
 	else if (*need < RSIZE)
 		exit(0);
 }
 
-size_t		ms_getline(char **line)
+ssize_t		ms_getline(char **line)
 {
 	char	*c;
 	char	buf[RSIZE + 1];
-	size_t	size;
-	size_t	fill;
-	size_t	need;
+	ssize_t	size;
+	ssize_t	fill;
+	ssize_t	need;
 
 	fill = 0;
 	size = RSIZE + 1;
-	*line = (char *)malloc(size * sizeof(char));
+	*line = (char *)malloc((size_t)size * sizeof(char));
 	if (g_store != NULL)
 		if (recall(line, &size, &fill) != 0)
 			return (fill);
@@ -97,7 +97,7 @@ size_t		ms_getline(char **line)
 		aux(&c, &need, buf);
 		if (need >= size)
 			extend(line, &size, need, fill);
-		ft_memcpy(*line, buf, need);
+		ft_memcpy(*line, buf, (size_t)need);
 		fill += need - 1;
 		if (c != NULL)
 			break ;
