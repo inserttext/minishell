@@ -72,9 +72,8 @@ char				**tokenize(char *str)
 	tok = (char **)malloc((lst->size + 1) * sizeof(char *));
 	while (curr != NULL)
 	{
-		tok[i] = curr->data;
+		tok[i++] = curr->data;
 		curr = curr->next;
-		i++;
 	}
 	tok[i] = NULL;
 	del(lst);
