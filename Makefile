@@ -1,6 +1,7 @@
 CC        = gcc
 CFLAGS    = -MMD
-CERR      = -Wall -Wextra -Werror
+CERR      = -Wall -Wextra
+CERR     += -Werror
 NAME      = minishell
 BIN_DIR   = bin
 BUILD_DIR = build
