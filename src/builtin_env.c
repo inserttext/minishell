@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include "../includes/minishell.h"
+#include "libft.h"
+#include "minishell.h"
 
 int	builtin_env(char **tok)
 {

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/includes/libft.h"
+#include "minishell.h"
+#include "libft.h"
 
 char	*ms_getenv(char *name)
 {

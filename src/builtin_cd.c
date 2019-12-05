@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include "../includes/minishell.h"
+#include "libft.h"
+#include "minishell.h"
 #include <sys/types.h>
 #include <dirent.h>
 #include <unistd.h>

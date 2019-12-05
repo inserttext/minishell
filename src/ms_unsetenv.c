@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include "../includes/minishell.h"
+#include "libft.h"
+#include "minishell.h"
 
 static void	delete(char **pos)
 {
