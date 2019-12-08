@@ -34,10 +34,12 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
 .PHONY: clean fclean re
 
 clean:
+	make -C libft clean
 	rm -f $(OBJ)
 	rm -f $(DEP)
 
 fclean:
+	make -C libft fclean
 	rm -rf $(BUILD_DIR)
 	rm -rf $(BIN_DIR)
 
