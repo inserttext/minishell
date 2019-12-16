@@ -13,6 +13,8 @@
 #include "libft.h"
 #include "minishell.h"
 
+#define sanity(a) if (a){free(line);continue;}
+
 void	delete(char **mem, char *line)
 {
 	size_t i;
@@ -31,25 +33,18 @@ void	ms_loop(void)
 {
 	char	*line;
 	char	**tok;
+	ssize_t	len;
 	int		loop;
 
-	loop = 1;
+	loop = 0;
 	while (loop >= 0)
 	{
 		write(STDOUT_FILENO, "$> ", 3);
-		if (ms_getline(&line) == 0)
+		if ((len = ms_getline(&line)) == 0)
 			return ;
-		if (line[0] == '\0')
-		{
-			free(line);
-			continue;
-		}
-		tok = tokenize(line);
-		if (tok == NULL)
-		{
-			free(line);
-			continue;
-		}
+		sanity(line[0] == '\0')
+		tok = tokenize(&line, len);
+		sanity(tok == NULL)
 		substitute(tok);
 		loop = launcher(tok);
 		delete(tok, line);

@@ -38,7 +38,7 @@ void			ms_unsetenv(char *name);
 
 void			ms_loop();
 ssize_t			ms_getline(char **line);
-char			**tokenize(char *str);
+char			**tokenize(char **str, ssize_t len);
 void			substitute(char **tok);
 int				launcher(char **tok);
 
