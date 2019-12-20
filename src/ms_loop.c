@@ -47,6 +47,10 @@ void	ms_loop(void)
 		sanity(tok == NULL)
 		substitute(tok);
 		loop = launcher(tok);
-		delete(tok, line);
+		for (int i = 0; tok[i]; ++i) {
+			printf("%s\n", tok[i]);
+		}
+		free(line);
+		/* delete(tok, line); */
 	}
 }

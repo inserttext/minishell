@@ -36,6 +36,8 @@ char			*ms_getenv(char *name);
 void			ms_setenv(char *name, const char *value, int overwrite);
 void			ms_unsetenv(char *name);
 
+char			*ms_strtok(char **s, ssize_t *len);
+
 void			ms_loop();
 ssize_t			ms_getline(char **line);
 char			**tokenize(char **str, ssize_t len);
