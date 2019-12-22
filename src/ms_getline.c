@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define RSIZE 2048U
+#define RSIZE 512U
 
 static char	*g_storep = 0;
 static char	*g_store = 0;
