@@ -13,44 +13,96 @@
 #include "libft.h"
 #include "minishell.h"
 
-#define sanity(a) if (a){free(line);continue;}
-
-void	delete(char **mem, char *line)
+int		brack(const char *line)
 {
-	size_t i;
+	size_t	pos;
+	char	d[2];
 
-	i = 0;
-	while (mem[i] != NULL)
+	d[1] = '\0';
+	while (line[pos = ft_strcspn(line, "\"'")] == '"' || line[pos] == '\'')
 	{
-		free(mem[i]);
-		i++;
+		d[0] = line[pos];
+		line += pos + 1;
+		while (line[pos = ft_strcspn(line, d)] == d[0] && line[pos] == '\\')
+			line += pos + 1;
+		line += pos + 1;
+		if (line[-1] != d[0])
+			return (*line - 34 == 5 ? 2 : 3);
 	}
-	free(mem);
+	return (0);
+}
+
+int		verify(const char *line)
+{
+	size_t len;
+	int ret;
+
+	ret = 0;
+	if (*line == '\0' || *line == '\n')
+		return (0);
+	else
+		ret = brack(line);
+	len = ft_strlen(line);
+	if (ret == 0 && len >= 2 && line[len - 1] == '\n' && line[len - 2] == '\\')
+		ret = 1;
+	return (ret);
+}
+
+char	*getinput(void)
+{
+	char	*input;
+	char	*line;
+	char	*tmp;
+	int		ver;
+
+	ms_getline(&input);
+	while ((ver = verify(input)))
+	{
+		if (ver == 2)
+			write(STDOUT_FILENO, "quote", 5);
+		else if (ver == 3)
+			write(STDOUT_FILENO, "dquote", 6);
+		write(STDOUT_FILENO, "> ", 2);
+		ms_getline(&line);
+		tmp = input;
+		input = ft_strjoin(2, input, line);
+		free(tmp);
+		free(line);
+	}
+	return (input);
+}
+
+void	cleanup(char **tok, char *line)
+{
+	size_t	i;
+
 	free(line);
+	i = 0;
+	while (tok[i])
+		free(tok[i++]);
+	free(tok);
 }
 
 void	ms_loop(void)
 {
 	char	*line;
 	char	**tok;
-	ssize_t	len;
 	int		loop;
 
 	loop = 0;
 	while (loop >= 0)
 	{
 		write(STDOUT_FILENO, "$> ", 3);
-		if ((len = ms_getline(&line)) == 0)
-			return ;
-		sanity(line[0] == '\0')
-		tok = tokenize(&line, len);
-		sanity(tok == NULL)
+		if (*(line = getinput()) == '\0' || *line == '\n')
+		{
+			if (*line == '\0')
+				write(STDOUT_FILENO, "\n", 1);
+			free(line);
+			continue;
+		}
+		line[ft_strlen(line) - 1] = '\0';
+		tok = tokenize(line);
 		substitute(tok);
 		loop = launcher(tok);
-		for (int i = 0; tok[i]; ++i) {
-			printf("%s\n", tok[i]);
-		}
-		free(line);
-		/* delete(tok, line); */
 	}
 }

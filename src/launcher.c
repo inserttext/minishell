@@ -90,6 +90,7 @@ int						launcher(char **tok)
 	unsigned long	hashed;
 	int				ret;
 
+	ret = 1;
 	hashed = hash((unsigned char *)tok[0]) % 128;
 	if (tbl[hashed].name != NULL && ft_strcmp(tok[0], tbl[hashed].name) == 0)
 		ret = tbl[hashed].f(tok);

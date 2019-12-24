@@ -13,39 +13,40 @@
 #include "minishell.h"
 #include "libft.h"
 
-char		*brack(char *s, char **save)
+static char	*brack(char *s)
 {
 	char *end;
-	char *d;
+	char d[2];
 
-	d = " ";
-	if (*s == '"' || *s == '\'')
-	{
-		d[0] = *s;
-		s++;
-	}
+	d[0] = *s++;
+	d[1] = '\0';
 	end = s;
-	while (1)
-	{
-		end += ft_strcspn(end, d);
-		if (end[-1] == '\\')
-			continue;
-		else
-			break;
-	}
-	*end = '\0';
-	*save = end + 1;
-	return (s);
+	while (*((end += ft_strcspn(end, d))) == '\\' && *end != '\0')
+		;
+	return (end);
 }
 
-char		*ms_strtok(char **s)
+char	*ms_strtok(char *s)
 {
-	static char	*olds;
+	static char *olds = NULL;
+	char *end;
 
-	if (*s != NULL)
-		olds = *s;
-	olds += ft_strspn(olds, " ");
-	if (*olds == '\0')
+	if (s == NULL)
+		s = olds;
+	s += ft_strspn(s, " ");
+	if (*s == '\0')
+	{
+		olds = s;
 		return (NULL);
-	return (brack(olds, &olds));
+	}
+	if (*s == '"' || *s == '\'')
+	{
+		end = brack(s);
+		s++;
+	}
+	else
+		end = s + ft_strcspn(s, " ");
+	olds = end + (*end == '\0' ? 0 : 1);
+	*end = '\0';
+	return (s);
 }

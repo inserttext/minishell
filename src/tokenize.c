@@ -16,37 +16,32 @@
 char	**tok_realloc(char **tok, size_t *t_len)
 {
 	char **new;
-	size_t old;
+	size_t oldl;
 
-	old = *t_len;
+	oldl = *t_len;
 	*t_len += 5;
 	new = (char **)ft_calloc(*t_len + 1, sizeof(char *));
-	ft_memcpy(new, tok, old * sizeof(char *));
+	ft_memcpy(new, tok, oldl * sizeof(char *));
 	free(tok);
 	return (new);
 }
 
-char	**tokenize(char **str, ssize_t len)
+char	**tokenize(char *str)
 {
 	char	**tok;
-	char	*store;
 	size_t	t_len;
 	size_t	i;
 
 	i = 0;
 	t_len = 5;
 	tok = (char **)ft_calloc(t_len + 1, sizeof(char *));
-	tok[0] = (char *)(ms_strtok(str, &len) - *str);
-	while ((store = ms_strtok(NULL, &len)) != NULL)
+	tok[i] = ms_strtok(str);
+	while (tok[i] != NULL)
 	{
-		tok[++i] = (char *)(store - *str);
+		i++;
 		if (i >= t_len)
 			tok = tok_realloc(tok, &t_len);
-	}
-	i = 0;
-	while (tok[i]) {
-		tok[i] = (intptr_t)tok[i] + *str;
-		++i;
+		tok[i] = ms_strtok(NULL);
 	}
 	return (tok);
 }

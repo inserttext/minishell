@@ -36,11 +36,11 @@ char			*ms_getenv(char *name);
 void			ms_setenv(char *name, const char *value, int overwrite);
 void			ms_unsetenv(char *name);
 
-char			*ms_strtok(char **s);
+char			*ms_strtok(char *s);
 
 void			ms_loop();
 ssize_t			ms_getline(char **line);
-char			**tokenize(char **str, ssize_t len);
+char			**tokenize(char *str);
 void			substitute(char **tok);
 int				launcher(char **tok);
 
