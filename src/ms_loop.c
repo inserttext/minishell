@@ -104,5 +104,6 @@ void	ms_loop(void)
 		tok = tokenize(line);
 		substitute(tok);
 		loop = launcher(tok);
+		cleanup(tok, line);
 	}
 }
