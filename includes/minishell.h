@@ -30,7 +30,7 @@ struct			s_lst
 
 extern size_t	g_env_size;
 extern char		**g_environ;
-extern char		*g_pid;
+extern pid_t	g_pid;
 
 char			*ms_getenv(char *name);
 void			ms_setenv(char *name, const char *value, int overwrite);

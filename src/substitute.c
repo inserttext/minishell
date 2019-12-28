@@ -29,14 +29,13 @@ char	*getvalue(char **str, size_t len)
 	return (value);
 }
 
-char	*cashmoney(char **str)
-{
-	size_t	len;
+char	*envsub(char **str) {
+	size_t len;
 
 	if ((*str)[1] == '$')
 	{
 		*str += 2;
-		return (ft_strdup(g_pid));
+		return (ft_itoa(g_pid));
 	}
 	else if ((len = ft_strspn(++(*str), ENVC)) == 0)
 		return (ft_strdup("$"));
@@ -50,7 +49,7 @@ char	*next(char **str)
 	size_t		len;
 
 	if ((*str)[0] == '$')
-		return (cashmoney(str));
+		return (envsub(str));
 	len = ft_strcspn(*str, "$");
 	dup = (char *)malloc((len + 1) * sizeof(char));
 	ft_memcpy(dup, *str, len);
