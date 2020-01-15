@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:35 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:55:26 by marvin           ###   ########.fr       */
+/*   Updated: 2020/01/15 13:46:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 char	**tok_realloc(char **tok, size_t *t_len)
 {
-	char **new;
-	size_t oldl;
+	char	**new;
+	size_t	oldl;
 
 	oldl = *t_len;
 	*t_len += 5;

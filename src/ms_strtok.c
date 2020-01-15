@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:35 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:55:26 by marvin           ###   ########.fr       */
+/*   Updated: 2020/01/15 13:44:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static char	*brack(char *s)
 	return (end);
 }
 
-char	*ms_strtok(char *s)
+char		*ms_strtok(char *s)
 {
-	static char *olds = NULL;
-	char *end;
+	static char	*olds = NULL;
+	char		*end;
 
 	if (s == NULL)
 		s = olds;

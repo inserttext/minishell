@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:34 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:56:11 by marvin           ###   ########.fr       */
+/*   Updated: 2020/01/15 13:46:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ char	*getvalue(char **str, size_t len)
 	return (value);
 }
 
-char	*envsub(char **str) {
+char	*envsub(char **str)
+{
 	size_t len;
 
 	if ((*str)[1] == '$')

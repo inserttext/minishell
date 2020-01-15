@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:40:32 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/28 09:50:00 by marvin           ###   ########.fr       */
+/*   Updated: 2020/01/15 13:45:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int		brack(const char *line)
 
 int		verify(const char *line)
 {
-	size_t len;
-	int ret;
+	size_t	len;
+	int		ret;
 
 	ret = 0;
 	if (*line == '\0' || *line == '\n')
