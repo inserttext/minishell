@@ -26,7 +26,7 @@ libft/libft.a:
 $(BIN_DIR)/$(NAME): $(OBJ) libft/libft.a | $(BIN_DIR)/
 	$(CC) -o $@ $^ $(LIBS)
 
-$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/ $(BUILD_DIR)/src/
 	$(CC) $(CERR) $(CFLAGS) -c -o $@ $< $(INC)
 
 -include $(DEP)
