@@ -1,7 +1,7 @@
 CC        = gcc
 CFLAGS    = -MMD -g3
-CERR      = -Wall -Wextra -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion
-# CERR     += -Werror
+CERR      = -Wall -Wextra
+CERR     += -Werror
 NAME      = minishell
 BIN_DIR   = bin
 BUILD_DIR = build

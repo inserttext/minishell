@@ -15,14 +15,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define ENVIRON extern char **environ
-
-ENVIRON;
 size_t	g_env_size;
 char	**g_environ;
 pid_t	g_pid;
 
-static size_t	get_env_size(void)
+static size_t	get_env_size(char **environ)
 {
 	size_t len;
 
@@ -32,7 +29,7 @@ static size_t	get_env_size(void)
 	return (len);
 }
 
-static void		env_cpy(void)
+static void		env_cpy(char **environ)
 {
 	size_t i;
 
@@ -58,11 +55,13 @@ static void		del_env(void)
 	free(g_environ);
 }
 
-int				main(void)
+int				main(int argc, char **argv, char **env)
 {
-	g_env_size = get_env_size();
+	(void)argc;
+	(void)argv;
+	g_env_size = get_env_size(env);
 	g_pid = getpid();
-	env_cpy();
+	env_cpy(env);
 	ms_loop();
 	del_env();
 	return (0);
