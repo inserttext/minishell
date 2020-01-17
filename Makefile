@@ -21,7 +21,7 @@ $(NAME): $(BIN_DIR)/$(NAME)
 	mkdir -p $@
 
 libft/libft.a:
-	make -C libft
+	make -C libft/ libft.a
 
 $(BIN_DIR)/$(NAME): $(OBJ) libft/libft.a | $(BIN_DIR)/
 	$(CC) -o $@ $^ $(LIBS)
@@ -31,7 +31,7 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)/src/
 
 -include $(DEP)
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re libft/libft.a
 
 clean:
 	make -C libft clean
