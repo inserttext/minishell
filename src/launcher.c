@@ -19,8 +19,9 @@ static struct s_func	tbl[128] = {
 	[5] = {"exit", &builtin_exit},
 	[24] = {"env", &builtin_env},
 	[36] = {"echo", &builtin_echo},
-	[60] = {"unset", &builtin_unset},
-	[97] = {"export", &builtin_export},
+	[58] = {"setenv", &builtin_setenv},
+	[60] = {"unset", &builtin_unsetenv},
+	[97] = {"export", &builtin_setenv},
 	[98] = {"cd", &builtin_cd},
 };
 

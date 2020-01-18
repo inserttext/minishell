@@ -48,7 +48,7 @@ int				builtin_cd(char **tok);
 int				builtin_exit(char **tok);
 int				builtin_echo(char **tok);
 int				builtin_env(char **tok);
-int				builtin_export(char **tok);
-int				builtin_unset(char **tok);
+int				builtin_setenv(char **tok);
+int				builtin_unsetenv(char **tok);
 
 #endif

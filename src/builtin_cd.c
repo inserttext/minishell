@@ -23,7 +23,7 @@ static void	changedir(char *dir)
 	if (dir == NULL)
 		return;
 	chdir(dir);
-	ms_setenv("OLDPWD", tmp = ms_getenv("PWD"), 1);
+	ms_setenv("OLDPWD", ms_getenv("PWD"), 1);
 	ms_setenv("PWD", tmp = getcwd(NULL, 0), 1);
 	free(tmp);
 }
@@ -45,8 +45,6 @@ int			builtin_cd(char **tok)
 	{
 		if (ms_getenv("HOME") != NULL)
 			changedir(ms_getenv("HOME"));
-		else
-			return (0);
 	}
 	else if (*((uint16_t *)tok[1]) == *(uint16_t *)"-")
 		prev();
