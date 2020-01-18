@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 14:39:39 by marvin            #+#    #+#             */
-/*   Updated: 2019/08/13 14:45:43 by marvin           ###   ########.fr       */
+/*   Updated: 2020/01/17 15:13:49 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,23 @@
 
 static void	changedir(char *dir)
 {
+	char *tmp;
+
+	if (dir == NULL)
+		return;
 	chdir(dir);
-	ms_setenv("OLDPWD", ms_getenv("PWD"), 1);
-	ms_setenv("PWD", getcwd(NULL, 0), 1);
+	ms_setenv("OLDPWD", tmp = ms_getenv("PWD"), 1);
+	ms_setenv("PWD", tmp = getcwd(NULL, 0), 1);
+	free(tmp);
+}
+
+static void prev()
+{
+	char *tmp;
+
+	changedir(ms_getenv("OLDPWD"));
+	ft_printf("%s\n", tmp = getcwd(NULL, 0));
+	free(tmp);
 }
 
 int			builtin_cd(char **tok)
@@ -34,6 +48,8 @@ int			builtin_cd(char **tok)
 		else
 			return (0);
 	}
+	else if (*((uint16_t *)tok[1]) == *(uint16_t *)"-")
+		prev();
 	else if (access(tok[1], R_OK) == 0)
 	{
 		if ((dir = opendir(tok[1])) != NULL)
