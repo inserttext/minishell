@@ -30,12 +30,20 @@ static void	changedir(char *dir)
 
 static void prev()
 {
-	char *tmp;
+	char	*cwd;
+	size_t	len;
 
 	changedir(ms_getenv("OLDPWD"));
-	ft_printf("%s\n", tmp = getcwd(NULL, 0));
-	free(tmp);
+	cwd = getcwd(NULL, 0);
+	len = ft_strlen(ms_getenv("HOME"));
+	if (ft_strncmp(cwd, ms_getenv("HOME"), len) == 0)
+		cwd[len - 1] = '~';
+	else
+		len = 1;
+	ft_printf("%s\n", cwd + len - 1);
+	free(cwd);
 }
+
 
 int			builtin_cd(char **tok)
 {
