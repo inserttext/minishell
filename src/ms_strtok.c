@@ -33,7 +33,7 @@ char		*ms_strtok(char *s)
 
 	if (s == NULL)
 		s = olds;
-	s += ft_strspn(s, " ");
+	s += ft_strspn(s, " \t");
 	if (*s == '\0')
 	{
 		olds = s;
@@ -45,7 +45,7 @@ char		*ms_strtok(char *s)
 		s++;
 	}
 	else
-		end = s + ft_strcspn(s, " ");
+		end = s + ft_strcspn(s, " \t");
 	olds = end + (*end == '\0' ? 0 : 1);
 	*end = '\0';
 	return (s);
