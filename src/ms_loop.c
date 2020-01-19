@@ -102,8 +102,11 @@ void	ms_loop(void)
 		}
 		line[ft_strlen(line) - 1] = '\0';
 		tok = tokenize(line);
-		substitute(tok);
-		loop = launcher(tok);
+		if (tok[0] != NULL)
+		{
+			substitute(tok);
+			loop = launcher(tok);
+		}
 		cleanup(tok, line);
 	}
 }
