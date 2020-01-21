@@ -40,12 +40,11 @@ char		*ms_strtok(char *s)
 		return (NULL);
 	}
 	if (*s == '"' || *s == '\'')
-	{
-		end = brack(s);
-		s++;
-	}
+		end = brack(s++);
 	else
-		end = s + ft_strcspn(s, " \t");
+		end = s + ft_strcspn(s, " \t\"'");
+	if (*s == '"' || *s == '\'')
+		end = brack(s++);
 	olds = end + (*end == '\0' ? 0 : 1);
 	*end = '\0';
 	return (s);
