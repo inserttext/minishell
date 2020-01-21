@@ -21,14 +21,14 @@ static void	changedir(char *dir)
 	char *tmp;
 
 	if (dir == NULL)
-		return;
+		return ;
 	chdir(dir);
 	ms_setenv("OLDPWD", ms_getenv("PWD"), 1);
 	ms_setenv("PWD", tmp = getcwd(NULL, 0), 1);
 	free(tmp);
 }
 
-static void prev()
+static void	prev(void)
 {
 	char	*cwd;
 	size_t	len;
@@ -43,7 +43,6 @@ static void prev()
 	ft_printf("%s\n", cwd + len - 1);
 	free(cwd);
 }
-
 
 int			builtin_cd(char **tok)
 {
