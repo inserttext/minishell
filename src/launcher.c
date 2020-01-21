@@ -66,8 +66,10 @@ static int				searchpath(char **tok)
 	char *path;
 	char *run;
 
-	fullpath = ft_strdup(ms_getenv("PATH"));
-	path = ft_strtok(fullpath, ":");
+	if ((fullpath = ft_strdup(ms_getenv("PATH"))) == NULL)
+		path = NULL;
+	else
+		path = ft_strtok(fullpath, ":");
 	while (path != NULL)
 	{
 		run = ft_strjoin(3, path, "/", tok[0]);
